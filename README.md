@@ -25,16 +25,16 @@ Send httprequest to that site via http. After that, the server time which is con
 ## 📝 Todo list
 제작할 코드와 문서들입니다.(밑에 Emoji를 클릭하면 해당하는 Github page로 이동합니다)
 
-- [x] [💻] 메인 타이틀
-- [x] [💻] 앱 사용 설명 출력부
-- [x] [💻] 링크 입력부
-- [x] [💻] 시작, 중지 버튼 구현
-- [x] [💻] 시간 출력부
-- [x] [💻] 안내문 출력부
-- [x] [📗] HTTP Request를 통한 Header 수신 기능 구현
-- [x] [📗] Header부의 date 파싱을 통해 한국 표준시로 변경하고 출력
-- [x] [📗] 시작 버튼 클릭시 HttpRequest는 중지시까지 background 실행
-- [x] [📗] 중지 버튼 클릭시 실행중인 background 중지
+- [x] [💻] 메인 타이틀 (완료 ver 1.0)
+- [x] [💻] 앱 사용 설명 출력부 (완료 ver 1.0)
+- [x] [💻] 링크 입력부 (완료 ver 1.0)
+- [x] [💻] 시작, 중지 버튼 구현 (완료 ver 1.0)
+- [x] [💻] 시간 출력부 (완료 ver 1.0)
+- [x] [💻] 안내문 출력부 (완료 ver 1.0)
+- [x] [📗] HTTP Request를 통한 Header 수신 기능 구현 (완료 ver 1.0)
+- [x] [📗] Header부의 date 파싱을 통해 한국 표준시로 변경하고 출력 (완료 ver 1.0)
+- [x] [📗] 시작 버튼 클릭시 HttpRequest는 중지시까지 background 실행 (완료 ver 1.0)
+- [x] [📗] 중지 버튼 클릭시 실행중인 background 중지 (완료 ver 1.0)
 - [ ] [🔨] 오버레이 기능 구현
 - [ ] [🔨] 오버레이 뷰 디자인
 - [ ] [🔨] 앱 전체적인 디자인 
