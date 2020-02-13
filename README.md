@@ -4,10 +4,9 @@ It is an app that shows the server time by receiving a link to the site from the
 
 
 ## ✨ summary
-http통신을 통해 사이트에 httprequest를 보내고,
-이후 서버에서 전달받은 헤더에 담겨져있는 서버시간을 앱 안에 출력합니다.
-send httprequest to that site via http\
-After that, the server time which is contained in the header what user received from the server is printed in the app.
+http통신을 통해 사이트에 httprequest를 보내고,  
+이후 서버에서 전달받은 헤더에 담겨져있는 서버시간을 앱 안에 출력합니다.  
+Send httprequest to that site via http. After that, the server time which is contained in the header what user received from the server is printed in the app.
   
 ## 📖 Introduction  
 수강신청이나 티켓팅을 할때면 버튼 클릭을 언제하냐에 따라서 희비가 오가는 경우가 많았습니다.
