@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="서버 시간 알리미"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/subTitle"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="서버시간을 알고싶은 사이트 주소를 아래 창에 적어주세요"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/UrlText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/subTitle"
+        android:layout_centerHorizontal="true"
+        android:ems="15"
+        android:inputType="textUri"
+        android:text="https://" />
+
+    <RelativeLayout
+        android:id="@+id/btnLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/UrlText"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:foregroundGravity="center_horizontal">
+
+        <Button
+            android:id="@+id/StartBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="startBtn"
+            android:text="시작" />
+
+        <Button
+            android:id="@+id/StopBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/StartBtn"
+            android:onClick="stopBtn"
+            android:text="중지" />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/Explain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:text="서버 시간이 아래에 표시됩니다."
+        android:textSize="20dp" />
+
+
+    //시간 출력 부분
+
+    <TextView
+        android:id="@+id/tv_outPut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Explain"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:text=""
+        android:textColor="@color/TimeBlue"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/Explain2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:text="*안내* \n시계가 비정상적으로 작동시, \n사이트의 정확한 전체 주소를 붙여넣어 주세요"
+        android:textSize="15dp" />
+
+
+</RelativeLayout>
