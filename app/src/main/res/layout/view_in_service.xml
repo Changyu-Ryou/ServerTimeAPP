@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mPopView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:background="#ffffff"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="시간이 표시됩니다."
+        android:textColor="#555555"
+        android:textSize="20dp" />
+
+
+
+</RelativeLayout>

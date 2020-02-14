@@ -38,6 +38,16 @@
         android:inputType="textUri"
         android:text="https://" />
 
+    <ImageButton
+        android:id="@+id/PastBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btnLayout"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@id/UrlText"
+        android:onClick="pastBtn"
+        app:srcCompat="@drawable/ic_content_paste_black_24dp" />
+
     <RelativeLayout
         android:id="@+id/btnLayout"
         android:layout_width="match_parent"
@@ -62,6 +72,14 @@
             android:onClick="stopBtn"
             android:text="중지" />
 
+        <Button
+            android:id="@+id/Overlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/StopBtn"
+            android:onClick="Overlay"
+            android:text="위젯" />
+
 
     </RelativeLayout>
 
@@ -83,7 +101,7 @@
     <TextView
         android:id="@+id/tv_outPut"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_below="@id/Explain"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -92,6 +110,27 @@
         android:text=""
         android:textColor="@color/TimeBlue"
         android:textSize="30dp" />
+
+
+    <TextView
+        android:id="@+id/WidSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="위젯 크기 조절"
+        android:layout_below="@id/tv_outPut"
+        android:layout_marginLeft="20dp"/>
+
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/WidSize"
+        android:max="10"
+        android:progress="0" />
 
     <TextView
         android:id="@+id/Explain2"
