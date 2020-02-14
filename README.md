@@ -37,3 +37,14 @@ Send httprequest to that site via http. After that, the server time which is con
 - [ ] [🔨] 앱 전체적인 디자인 
 - [ ] [🔨] 로고 제작
 - [ ] [🔒] google AdMob광고 삽입 
+
+
+
+### ☁️ Screen Shot
+  
+> #### ver 1.0  
+<img src="https://user-images.githubusercontent.com/56837413/74477830-62cd6680-4eef-11ea-8d06-8c36afbba924.jpg" width="30%"></img> 
+ <img src="https://user-images.githubusercontent.com/56837413/74477619-fe120c00-4eee-11ea-82b8-749822bab159.jpg" width="30%"></img>
+
+
+
