@@ -32,7 +32,12 @@ Send httprequest to that site via http. After that, the server time which is con
 - [x] [📗] Header부의 date 파싱을 통해 한국 표준시로 변경하고 출력 (완료 ver 1.0)
 - [x] [📗] 시작 버튼 클릭시 HttpRequest는 중지시까지 background 실행 (완료 ver 1.0)
 - [x] [📗] 중지 버튼 클릭시 실행중인 background 중지 (완료 ver 1.0)
-- [ ] [🔨] 오버레이 기능 구현
+- [x] [📗] 클립보드에 저장되어져 있는 링크 주소 붙여넣기 버튼 (완료 ver 1.0)
+- [x] [🔨] 오버레이 버튼
+- [x] [🔨] 오버레이 위젯 구현
+- [x] [🔨] 오버레이 위젯 자유이동
+- [x] [🔨] 오버레이 위젯 크기조절 SeekBar
+- [ ] [🔨] 오버레이 위젯 배경색 변경
 - [ ] [🔨] 오버레이 뷰 디자인
 - [ ] [🔨] 앱 전체적인 디자인 
 - [ ] [🔨] 로고 제작
@@ -42,9 +47,12 @@ Send httprequest to that site via http. After that, the server time which is con
 
 ### ☁️ Screen Shot
   
-> #### ver 1.0  
+> #### ver 1.0 ( commit 2020-02-14 )
 <img src="https://user-images.githubusercontent.com/56837413/74477830-62cd6680-4eef-11ea-8d06-8c36afbba924.jpg" width="30%"></img> 
  <img src="https://user-images.githubusercontent.com/56837413/74477619-fe120c00-4eee-11ea-82b8-749822bab159.jpg" width="30%"></img>
-
-
+  
+> #### ver 1.1 ( commit 2020-02-14 )
+<img src="https://user-images.githubusercontent.com/56837413/74565281-40e9e780-4fb4-11ea-833e-55d963597bd4.jpg" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/56837413/74565288-447d6e80-4fb4-11ea-8a17-03bcf82eea31.jpg" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/56837413/74565293-48a98c00-4fb4-11ea-9b0f-7a4284aafe65.jpg" width="30%"></img>
 
