@@ -40,6 +40,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -66,56 +67,6 @@ public class MainActivity extends AppCompatActivity {
         widSize = (TextView) findViewById(R.id.WidSize);
 
         header = getLayoutInflater().inflate(R.layout.view_in_service, null, false);
-
-        LayoutInflater inflate = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mView = inflate.inflate(R.layout.view_in_service, null);
-
-        sb  = (SeekBar) findViewById(R.id.seekBar);
-        sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int progressResult;
-            public void onProgressChanged(SeekBar seekBar, int progress,
-                                          boolean fromUser) {
-                widSize.setText("위젯 크기 : " + progress);
-                /*progressResult=progress;
-                View widview = (View) mView.findViewById(R.id.view);
-                ViewGroup.LayoutParams wid = widview.getLayoutParams();
-                wid.width=progress*20;
-                wid.height=progress*100;
-                widview.setLayoutParams(new ViewGroup.LayoutParams(1000,1000));
-                System.out.println("-------------------"+progress*10);
-
-                TextView widTxt = (TextView) mView.findViewById(R.id.textView);
-                widTxt.setTextSize(25+progress);
-*/
-                View widview = (View) MyService.mView.findViewById(R.id.view);
-                ViewGroup.LayoutParams wid = widview.getLayoutParams();
-                RelativeLayout mpopView = (RelativeLayout) MyService.mView.findViewById(R.id.mPopView);
-                //widview.setLayoutParams(new RelativeLayout.LayoutParams(30*progress,20*progress));
-
-                TextView PopView = (TextView) MyService.mView.findViewById(R.id.textView); //오버레이
-                PopView.setTextSize(24+progress);
-                widview.setLayoutParams(new RelativeLayout.LayoutParams(PopView.getWidth(),PopView.getHeight()+5));
-                mpopView.setLayoutParams(new WindowManager.LayoutParams(PopView.getWidth()+5,PopView.getHeight()));
-                //mpopView = MyService.mView.findViewById(R.id.mPopView);
-
-
-
-
-
-                //mpopView.setLayoutParams(new RelativeLayout.LayoutParams(50,PopView.getHeight()));
-                //int txtSize
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
 
 
     }
@@ -206,6 +157,10 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
 
 
+    }
+
+    public void SetWidget(View view) {
+        startActivity(new Intent(this, SetWidget.class));
     }
 
 

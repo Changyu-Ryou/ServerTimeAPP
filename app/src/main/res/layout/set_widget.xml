@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/WidSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginLeft="20dp"
+        android:text="위젯 크기 조절"
+        android:textSize="25dp" />
+
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/WidSize"
+        android:thumb="@drawable/ic_fiber_manual_record_black_24dp"
+        android:layout_marginRight="39dp"
+        android:layout_marginLeft="39dp"
+        android:max="10"
+        android:progress="0" />
+
+    <TextView
+        android:id="@+id/ColorPick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBar"
+        android:text="색상 선택"
+        android:textSize="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginLeft="20dp"/>
+
+    <ImageView
+        android:id="@+id/Color_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/myshape_black"
+        android:layout_below="@+id/ColorPick" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:spinnerMode="dialog"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@id/ColorPick"
+        android:layout_toRightOf="@id/Color_image" />
+
+
+</RelativeLayout>

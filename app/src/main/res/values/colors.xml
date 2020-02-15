@@ -4,4 +4,11 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="TimeBlue">#007EFF</color>
+
+    <color name="Black">#2B2B2B</color>
+    <color name="White">#ffffff</color>
+    <color name="Red">#DA4453</color>
+    <color name="Blue">#9ACDFF</color>
+    <color name="Pink">#F93FA2</color>
+
 </resources>

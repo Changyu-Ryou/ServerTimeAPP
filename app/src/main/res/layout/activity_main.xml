@@ -111,26 +111,15 @@
         android:textColor="@color/TimeBlue"
         android:textSize="30dp" />
 
-
-    <TextView
-        android:id="@+id/WidSize"
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:text="위젯 크기 조절"
+        android:text="위젯 사용 설정"
+        android:textSize="20dp"
         android:layout_below="@id/tv_outPut"
-        android:layout_marginLeft="20dp"/>
-
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/WidSize"
-        android:max="10"
-        android:progress="0" />
+        android:layout_centerHorizontal="true"
+        android:onClick="SetWidget"
+        android:id="@+id/SetWidBtn" />
 
     <TextView
         android:id="@+id/Explain2"
