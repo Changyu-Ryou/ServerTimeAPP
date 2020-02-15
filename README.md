@@ -36,12 +36,15 @@ Send http request to that site via http. After that, the server time which is co
 - [x] [🔨] 오버레이 위젯 구현 (완료 ver 1.1)
 - [x] [🔨] 오버레이 위젯 자유이동 (완료 ver 1.1)
 - [x] [🔨] 오버레이 위젯 크기조절 SeekBar (완료 ver 1.1)
-- [ ] [🔨] 오버레이 위젯 배경색 변경 기능
+- [x] [🔨] (추가) 오버레이 위젯 Setting Activity 제작 (완료 ver 1.2)
+- [x] [🔨] (추가) 오버레이 위젯 크기조절 SeekBar를 setWidget Activity로 이동 (완료 ver 1.2)
+- [x] [🔨] 오버레이 위젯 배경색 변경 기능 (완료 ver 1.2)
 - [ ] [🔨] 오버레이 뷰 디자인
 - [ ] [🔨] 앱 전체적인 디자인 
 - [ ] [🔨] 로고 제작
 - [ ] [🔒] google AdMob광고 삽입
   <br/> <br/>
+  
 ## ☁️ Screen Shot
   
 > ### ver 1.0 ( commit 2020-02-14 )
@@ -56,4 +59,18 @@ Send http request to that site via http. After that, the server time which is co
 <img src="https://user-images.githubusercontent.com/56837413/74565281-40e9e780-4fb4-11ea-833e-55d963597bd4.jpg" width="30%"></img>
 <img src="https://user-images.githubusercontent.com/56837413/74565288-447d6e80-4fb4-11ea-8a17-03bcf82eea31.jpg" width="30%"></img>
 <img src="https://user-images.githubusercontent.com/56837413/74565293-48a98c00-4fb4-11ea-9b0f-7a4284aafe65.jpg" width="30%"></img>
+  
+  <br/>
+  <br/>
+  <br/>
+  
+> ### ver 1.2 ( commit 2020-02-16 )
+<img src="https://user-images.githubusercontent.com/56837413/74595084-d9e63480-5080-11ea-8b41-86eb10df4357.jpg" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/56837413/74595082-d94d9e00-5080-11ea-827a-ceb99a5bc55f.jpg" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/56837413/74595081-d783da80-5080-11ea-8629-3facd3048981.jpg" width="30%"></img>
+  
+  <br/>
+  <br/>
+  <br/>
+  
 
