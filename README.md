@@ -39,10 +39,13 @@ Send http request to that site via http. After that, the server time which is co
 - [x] [🔨] (추가) 오버레이 위젯 Setting Activity 제작 (완료 ver 1.2)
 - [x] [🔨] (추가) 오버레이 위젯 크기조절 SeekBar를 setWidget Activity로 이동 (완료 ver 1.2)
 - [x] [🔨] 오버레이 위젯 배경색 변경 기능 (완료 ver 1.2)
+- [x] [🔨] (추가) 오버레이 위젯의 시간이 실시간 갱신되지 않는 문제 해결 (완료 ver 1.2.2)
+- [ ] [🔨] (추가) 오버레이 더블 클릭시 앱으로 이동
+- [ ] [🔨] (추가) 메인, 위젯 셋팅 액티비티에 대한 생명주기 관리
 - [ ] [🔨] 오버레이 뷰 디자인
 - [ ] [🔨] 앱 전체적인 디자인 
 - [ ] [🔨] 로고 제작
-- [ ] [🔒] google AdMob광고 삽입 (완료 ver 1.2.1)
+- [x] [🔒] google AdMob광고 삽입 (완료 ver 1.2.1)
   <br/> <br/>
   
 ## ☁️ Screen Shot
