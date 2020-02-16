@@ -6,9 +6,11 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="35dp"
         android:background="@color/White"/>
+
+    <!-- 뷰 width = 150dp로 설정해뒀었음 -->
 
     <TextView
         android:id="@+id/textView"

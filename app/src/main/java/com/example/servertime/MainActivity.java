@@ -46,6 +46,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -54,22 +55,27 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 1;
     private int checker = 3;      //http 헤더 받아오는 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
+    private int widFlag = 3;      //위젯 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
     private String url = "";
-    int widFlag = 0;        //위젯이 작동하는지 확인 flag  0=오버레이x, 1=오버레이 동작중
     static View mView;      //view_in_service;
     TextView explain;
     TextView tv_outPut;
     TextView widSize;
     final Handler handler = new Handler();
-    SeekBar sb;
     private View header;
-    private AdView mAdView;
+    private AdView mAdView;                     //구글 애드몹
+    TextView PopView;
+    static String contextForPopUp = "";        //팝업창 전용 포멧 데이터를 스트링으로 저장
+    private Context Context1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //구글 애드몹
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -79,17 +85,30 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-
-
+        //init
         explain = (TextView) findViewById(R.id.Explain);
         tv_outPut = (TextView) findViewById(R.id.tv_outPut);
         widSize = (TextView) findViewById(R.id.WidSize);
 
         header = getLayoutInflater().inflate(R.layout.view_in_service, null, false);
-
+        //header.findViewById(R.id.textView);
 
     }
 
+    //생명주기 관리
+/*
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(STATE_CHECKER,checker);
+
+        super.onSaveInstanceState(outState);
+    }
+    */
+
+    public static String gettime(){
+
+        return contextForPopUp;
+    }
 
     @Override
     public void onBackPressed() {
@@ -159,8 +178,10 @@ public class MainActivity extends AppCompatActivity {
     //중지 버튼
     public void stopBtn(View view) {
         checker = 1;      //handler 중지시키기
-        widFlag = 0;      //위젯 중지시키기
+        widFlag = 1;      //위젯 중지시키기
         handler.removeCallbacks(null);      //handler 중지시키기
+
+        MyService.stopWidget();
 
         explain.setText("서버 시간이 아래에 표시됩니다.");
         TextView tv_output = (TextView) findViewById(R.id.tv_outPut);
@@ -175,20 +196,22 @@ public class MainActivity extends AppCompatActivity {
     //위젯 버튼
     public void Overlay(View view) {
         //권한 확인후 인텐트 실행
-        if(checker==0) {
+
+        if(checker==0){
+            MyService.startWidget(this);
             checkPermission();
-            widFlag=1;
-        }else
-            Toast.makeText(MainActivity.this, "아직 시작하지 않으셨습니다.\n왼쪽 시작 버튼을 눌러 시계를 작동시켜주세요", Toast.LENGTH_SHORT).show();
-
-
+            widFlag = 0;
+        }else{
+            Toast.makeText(MainActivity.this, "서버시간이 작동하고 있지 않습니다.\n시작 버튼을 눌러 작동시켜주세요", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void SetWidget(View view) {
-        if(widFlag==1)
+        if(widFlag==0)
             startActivity(new Intent(this, SetWidget.class));
-        else
-            Toast.makeText(MainActivity.this, "아직 위젯이 실행되지 않았습니다.\n위젯 버튼을 눌러 활성화 시켜주세요", Toast.LENGTH_SHORT).show();
+        else{
+            Toast.makeText(MainActivity.this, "위젯이 켜져있지 않습니다.\n위젯 버튼을 눌러 작동시켜주세요", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -202,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
                 //핸들러 remove로 해도 빠르게 중단되지 않아 다시한번 flag를 이용한 백그라운드 종료
                 return null;
             }
+            //PopView= (TextView)MyService.mView.findViewById(R.id.textView);
 
             SimpleDateFormat format = new SimpleDateFormat("E, d MMM yyyy k:m:s z", Locale.US);
             SimpleDateFormat formatChange = new SimpleDateFormat("yyyy년 M월 d일\nkk시 mm분 ss초", Locale.KOREA);
@@ -209,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
             SimpleDateFormat formatForPopUp = new SimpleDateFormat("kk시 mm분 ss초", Locale.KOREA);
             SimpleDateFormat formatKorea = new SimpleDateFormat("E, d MMM yyyy k:m:s z", Locale.KOREA);
             String context = "";        //포멧 데이터를 스트링으로 저장
-            String contextForPopUp="";        //팝업창 전용 포멧 데이터를 스트링으로 저장
+
             try {
                 Log.d(this.getClass().getName(), "start the NetworkTask");
                 URL obj = new URL(url);
@@ -233,12 +257,12 @@ public class MainActivity extends AppCompatActivity {
                             System.out.println(formatKorea.format(serverTime));
                             //context = formatKorea.format(serverTime);
                             context = formatChange.format(serverTime);
-                            contextForPopUp= formatForPopUp.format(serverTime);
+                            contextForPopUp = formatForPopUp.format(serverTime);
                             System.out.println("===============================");
                         }
                     }
                 }
-/*              //헤더들의 내용을 더 알 수 있음
+/*              //아래는 헤더들의 내용을 더 알 수 있음
                 System.out.println("\n\n\nGet Response Header By Key ...\n");
                 String server = conn.getHeaderField("Server");
 
@@ -255,11 +279,9 @@ public class MainActivity extends AppCompatActivity {
 
                 //TextView tv_outPut = (TextView) findViewById(R.id.tv_outPut);
                 tv_outPut.setText(context);
-
-                if(widFlag==1) {
-                    TextView PopView = (TextView) MyService.mView.findViewById(R.id.textView); //오버레이에도 시간표시
-                    PopView.setText(contextForPopUp);
-                }
+                //오버레이에도 시간표시
+                //PopView.setText(context);
+                //MyService.tView.setText(contextForPopUp);
 
                 System.out.println("done---");
             } catch (
