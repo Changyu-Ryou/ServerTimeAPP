@@ -40,6 +40,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -49,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 1;
     private int checker = 3;      //http 헤더 받아오는 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
     private String url = "";
+    int widFlag = 0;        //위젯이 작동하는지 확인 flag  0=오버레이x, 1=오버레이 동작중
     static View mView;      //view_in_service;
     TextView explain;
     TextView tv_outPut;
@@ -56,11 +63,23 @@ public class MainActivity extends AppCompatActivity {
     final Handler handler = new Handler();
     SeekBar sb;
     private View header;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
 
         explain = (TextView) findViewById(R.id.Explain);
         tv_outPut = (TextView) findViewById(R.id.tv_outPut);
@@ -70,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -113,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         url = urlText.getText().toString();    // URL 설정
 
         if (url.equals(http) || url.equals(nothing)) {
-            Toast.makeText(MainActivity.this, "입력하신 주소가 정확하지 않습니다. 다시 입력해주세요", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "입력하신 주소가 정확하지 않습니다. \n다시 입력해주세요", Toast.LENGTH_SHORT).show();
             explain.setText("서버 시간이 아래에 표시됩니다.");
             return;
         }
@@ -139,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
     //중지 버튼
     public void stopBtn(View view) {
         checker = 1;      //handler 중지시키기
+        widFlag = 0;      //위젯 중지시키기
         handler.removeCallbacks(null);      //handler 중지시키기
 
         explain.setText("서버 시간이 아래에 표시됩니다.");
@@ -154,13 +175,21 @@ public class MainActivity extends AppCompatActivity {
     //위젯 버튼
     public void Overlay(View view) {
         //권한 확인후 인텐트 실행
-        checkPermission();
+        if(checker==0) {
+            checkPermission();
+            widFlag=1;
+        }else
+            Toast.makeText(MainActivity.this, "아직 시작하지 않으셨습니다.\n왼쪽 시작 버튼을 눌러 시계를 작동시켜주세요", Toast.LENGTH_SHORT).show();
 
 
     }
 
     public void SetWidget(View view) {
-        startActivity(new Intent(this, SetWidget.class));
+        if(widFlag==1)
+            startActivity(new Intent(this, SetWidget.class));
+        else
+            Toast.makeText(MainActivity.this, "아직 위젯이 실행되지 않았습니다.\n위젯 버튼을 눌러 활성화 시켜주세요", Toast.LENGTH_SHORT).show();
+
     }
 
 
@@ -227,10 +256,10 @@ public class MainActivity extends AppCompatActivity {
                 //TextView tv_outPut = (TextView) findViewById(R.id.tv_outPut);
                 tv_outPut.setText(context);
 
-
-                TextView PopView = (TextView) MyService.mView.findViewById(R.id.textView); //오버레이에도 시간표시
-
-                PopView.setText(contextForPopUp);
+                if(widFlag==1) {
+                    TextView PopView = (TextView) MyService.mView.findViewById(R.id.textView); //오버레이에도 시간표시
+                    PopView.setText(contextForPopUp);
+                }
 
                 System.out.println("done---");
             } catch (
