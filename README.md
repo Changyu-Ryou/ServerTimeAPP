@@ -42,7 +42,7 @@ Send http request to that site via http. After that, the server time which is co
 - [ ] [🔨] 오버레이 뷰 디자인
 - [ ] [🔨] 앱 전체적인 디자인 
 - [ ] [🔨] 로고 제작
-- [ ] [🔒] google AdMob광고 삽입
+- [ ] [🔒] google AdMob광고 삽입 (완료 ver 1.2.1)
   <br/> <br/>
   
 ## ☁️ Screen Shot
@@ -73,4 +73,10 @@ Send http request to that site via http. After that, the server time which is co
   <br/>
   <br/>
   
-
+> ### ver 1.2.1 ( commit 2020-02-17 )
+<img src="https://user-images.githubusercontent.com/56837413/74609777-ab279700-5130-11ea-9478-2e1e80f9fdd5.jpg" width="30%"></img>
+ 
+  <br/>
+  <br/>
+  <br/>
+  
