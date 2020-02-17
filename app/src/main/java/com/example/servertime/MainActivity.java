@@ -66,14 +66,14 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView;                     //구글 애드몹
     TextView PopView;
     static String contextForPopUp = "";        //팝업창 전용 포멧 데이터를 스트링으로 저장
-    private Context Context1;
+    public static Context Context1;                   //다른 액티비티에서 onResume호출용
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Context1=this;
 
         //구글 애드몹
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
     */
 
-    public static String gettime(){
+    public static String gettime() {
 
         return contextForPopUp;
     }
@@ -192,24 +192,33 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+
+
+
+    }
+
 
     //위젯 버튼
     public void Overlay(View view) {
         //권한 확인후 인텐트 실행
 
-        if(checker==0){
+        if (checker == 0) {
             MyService.startWidget(this);
             checkPermission();
             widFlag = 0;
-        }else{
+        } else {
             Toast.makeText(MainActivity.this, "서버시간이 작동하고 있지 않습니다.\n시작 버튼을 눌러 작동시켜주세요", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void SetWidget(View view) {
-        if(widFlag==0)
+        if (widFlag == 0)
             startActivity(new Intent(this, SetWidget.class));
-        else{
+        else {
             Toast.makeText(MainActivity.this, "위젯이 켜져있지 않습니다.\n위젯 버튼을 눌러 작동시켜주세요", Toast.LENGTH_SHORT).show();
         }
 

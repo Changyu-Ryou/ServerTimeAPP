@@ -1,6 +1,10 @@
 package com.example.servertime;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -23,6 +27,10 @@ public class MyService extends Service {
     private float START_X, START_Y;
     private int PREV_X, PREV_Y;
     private int MAX_X = -1, MAX_Y = -1;
+
+    static Context MainContext;
+
+    private long btnPressTime = 0;        //더블클릭 확인용 변수
     WindowManager wm;
     static View mView;
     static WindowManager.LayoutParams params;
@@ -58,6 +66,8 @@ public class MyService extends Service {
 
         //final View view = (View) mView.findViewById(R.id.view);
         final View view = (View) mView.findViewById(R.id.view);
+        view.setOnLongClickListener(mViewLongClickListener);
+        view.setOnClickListener(mViewClickListener);
         view.setOnTouchListener(mViewTouchListener);
 
 
@@ -67,11 +77,11 @@ public class MyService extends Service {
         widFlag = 0;
         String widgetTime = MainActivity.gettime();
         String oriText = "시간이 표시됩니다.";
-
-        try{
+        MainContext = context;
+        try {
             //tView.setText("시간표기");
             mHandler.sendEmptyMessageDelayed(0, 100);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("waitLoading() 오류");
         }
 
@@ -97,7 +107,38 @@ public class MyService extends Service {
         mHandler.removeMessages(0);
     }
 
+    private View.OnLongClickListener mViewLongClickListener = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View view) {
+            Toast.makeText(MyService.this, "서버시간 앱이 열립니다.\n 잠시만 기다려주세요",
+                    Toast.LENGTH_SHORT).show();
+            Intent intent = getPackageManager().getLaunchIntentForPackage("com.example.servertime");
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
 
+            return false;
+        }
+
+    };
+
+
+    private View.OnClickListener mViewClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (System.currentTimeMillis() > btnPressTime + 1000) {
+                btnPressTime = System.currentTimeMillis();
+                return;
+            }
+            if (System.currentTimeMillis() <= btnPressTime + 1000) {    //서비스 시작
+                Toast.makeText(MyService.this, "서버시간 앱이 열립니다.\n 잠시만 기다려주세요",
+                        Toast.LENGTH_SHORT).show();
+                Intent intent = getPackageManager().getLaunchIntentForPackage("com.example.servertime");
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        }
+
+    };
 
 
     private View.OnTouchListener mViewTouchListener = new View.OnTouchListener() {
@@ -123,8 +164,7 @@ public class MyService extends Service {
                     wm.updateViewLayout(mView, params);
                     break;
             }
-
-            return true;
+            return false;
         }
     };
 
