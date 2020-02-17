@@ -39,23 +39,28 @@ Send http request to that site via http. After that, the server time which is co
 - [x] [🔨] (추가) 오버레이 위젯 Setting Activity 제작 (완료 ver 1.2)
 - [x] [🔨] (추가) 오버레이 위젯 크기조절 SeekBar를 setWidget Activity로 이동 (완료 ver 1.2)
 - [x] [🔨] 오버레이 위젯 배경색 변경 기능 (완료 ver 1.2)
+- [x] [🔨] (추가) 오버레이 위젯의 시간이 실시간 갱신되지 않는 문제 해결 (완료 ver 1.2.2)
+- [ ] [🔨] (추가) 오버레이 더블 클릭시 앱으로 이동
+- [ ] [🔨] (추가) 메인, 위젯 셋팅 액티비티에 대한 생명주기 관리
 - [ ] [🔨] 오버레이 뷰 디자인
 - [ ] [🔨] 앱 전체적인 디자인 
 - [ ] [🔨] 로고 제작
-- [ ] [🔒] google AdMob광고 삽입 (완료 ver 1.2.1)
+- [x] [🔒] google AdMob광고 삽입 (완료 ver 1.2.1)
   <br/> <br/>
   
 ## ☁️ Screen Shot
   
-> ### ver 1.0 ( commit 2020-02-14 )
+> ### ver 1.0 ( commit 2020-02-14 )  
+메인 액티비티 구성 및 서버 시간 핵심 기능 구현  
 <img src="https://user-images.githubusercontent.com/56837413/74477830-62cd6680-4eef-11ea-8d06-8c36afbba924.jpg" width="30%"></img> 
- <img src="https://user-images.githubusercontent.com/56837413/74477619-fe120c00-4eee-11ea-82b8-749822bab159.jpg" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/56837413/74477619-fe120c00-4eee-11ea-82b8-749822bab159.jpg" width="30%"></img>
   
   <br/>
   <br/>
   <br/>
   
-> ### ver 1.1 ( commit 2020-02-15 )
+> ### ver 1.1 ( commit 2020-02-15 )  
+오버레이 위젯 핵심 기능 구현  
 <img src="https://user-images.githubusercontent.com/56837413/74565281-40e9e780-4fb4-11ea-833e-55d963597bd4.jpg" width="30%"></img>
 <img src="https://user-images.githubusercontent.com/56837413/74565288-447d6e80-4fb4-11ea-8a17-03bcf82eea31.jpg" width="30%"></img>
 <img src="https://user-images.githubusercontent.com/56837413/74565293-48a98c00-4fb4-11ea-9b0f-7a4284aafe65.jpg" width="30%"></img>
@@ -64,7 +69,8 @@ Send http request to that site via http. After that, the server time which is co
   <br/>
   <br/>
   
-> ### ver 1.2 ( commit 2020-02-16 )
+> ### ver 1.2 ( commit 2020-02-16 )  
+위젯 기능 강화  
 <img src="https://user-images.githubusercontent.com/56837413/74595084-d9e63480-5080-11ea-8b41-86eb10df4357.jpg" width="30%"></img>
 <img src="https://user-images.githubusercontent.com/56837413/74595082-d94d9e00-5080-11ea-827a-ceb99a5bc55f.jpg" width="30%"></img>
 <img src="https://user-images.githubusercontent.com/56837413/74595081-d783da80-5080-11ea-8629-3facd3048981.jpg" width="30%"></img>
@@ -73,8 +79,18 @@ Send http request to that site via http. After that, the server time which is co
   <br/>
   <br/>
   
-> ### ver 1.2.1 ( commit 2020-02-17 )
+> ### ver 1.2.1 ( commit 2020-02-17 )  
+메인 하단 구글 애드몹 배너 추가  
 <img src="https://user-images.githubusercontent.com/56837413/74609777-ab279700-5130-11ea-9478-2e1e80f9fdd5.jpg" width="30%"></img>
+ 
+  <br/>
+  <br/>
+  <br/>
+  
+> ### ver 1.2.2 ( commit 2020-02-17 )  
+오버레이 위젯을 손으로 잡고있거나 이동시킬때만 시간이 갱신되는 문제를 수정. 이제 정상적으로 받아오는 서버시간에 맞춰 실시간으로 시간이 갱신되어 보여짐.  
+<img src="https://user-images.githubusercontent.com/56837413/74612140-031cc880-5146-11ea-941b-8d4d111c05d9.jpg" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/56837413/74612139-01530500-5146-11ea-90d9-f619c452419f.jpg" width="30%"></img>
  
   <br/>
   <br/>
