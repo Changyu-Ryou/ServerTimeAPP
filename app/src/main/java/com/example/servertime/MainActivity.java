@@ -32,6 +32,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
@@ -54,6 +55,9 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity {
 
     private static final int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 1;
+    private static final String STATE_CHECKER = "CHECKER_VALUE";      //체커 값
+    private static final String WIDGET_FLAG = "WIDGET_VALUE";       //위젯 플래그 값
+    private static final String URL_STATE = "URL_STATE";        //URL 링크 주소
     private int checker = 3;      //http 헤더 받아오는 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
     private int widFlag = 3;      //위젯 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
     private String url = "";
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     TextView explain;
     TextView tv_outPut;
     TextView widSize;
+    EditText URL_Link;
     final Handler handler = new Handler();
     private View header;
     private AdView mAdView;                     //구글 애드몹
@@ -89,26 +94,61 @@ public class MainActivity extends AppCompatActivity {
         explain = (TextView) findViewById(R.id.Explain);
         tv_outPut = (TextView) findViewById(R.id.tv_outPut);
         widSize = (TextView) findViewById(R.id.WidSize);
-
+        URL_Link = (EditText) findViewById(R.id.UrlText);
         header = getLayoutInflater().inflate(R.layout.view_in_service, null, false);
         //header.findViewById(R.id.textView);
+
+        if (savedInstanceState != null) {
+            checker = savedInstanceState.getInt(STATE_CHECKER);
+            widFlag = savedInstanceState.getInt(WIDGET_FLAG);
+
+            URL_Link.setText(savedInstanceState.getString(URL_STATE));
+        }
 
     }
 
     //생명주기 관리
-/*
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(STATE_CHECKER,checker);
+        outState.putInt(WIDGET_FLAG,widFlag);
+
+        String URL= URL_Link.getText().toString();
+        outState.putString(URL_STATE,URL);
+
 
         super.onSaveInstanceState(outState);
     }
-    */
+
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+
+        checker = savedInstanceState.getInt(STATE_CHECKER);
+        widFlag = savedInstanceState.getInt(WIDGET_FLAG);
+
+        URL_Link.setText(savedInstanceState.getString(URL_STATE));
+
+    }
+
 
     public static String gettime() {
 
         return contextForPopUp;
     }
+
+    @Override
+    public void onDestroy() {               //MainActivity 꺼지면 다 종료
+        super.onDestroy();
+        handler.removeMessages(0); //Handler 종료
+        Toast.makeText(MainActivity.this, "종료", Toast.LENGTH_SHORT).show();
+        moveTaskToBack(true);
+        finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -192,14 +232,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-
-        super.onResume();
-
-
-
-    }
 
 
     //위젯 버튼
@@ -218,6 +250,8 @@ public class MainActivity extends AppCompatActivity {
     public void SetWidget(View view) {
         if (widFlag == 0)
             startActivity(new Intent(this, SetWidget.class));
+
+
         else {
             Toast.makeText(MainActivity.this, "위젯이 켜져있지 않습니다.\n위젯 버튼을 눌러 작동시켜주세요", Toast.LENGTH_SHORT).show();
         }

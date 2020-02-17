@@ -185,7 +185,7 @@ public class MyService extends Service {
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy() {               //MainActivity 꺼지면 다 종료
         super.onDestroy();
         if (wm != null) {
             if (mView != null) {
