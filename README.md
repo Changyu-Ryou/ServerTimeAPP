@@ -41,7 +41,7 @@ Send http request to that site via http. After that, the server time which is co
 - [x] [🔨] 오버레이 위젯 배경색 변경 기능 (완료 ver 1.2)
 - [x] [🔨] (추가) 오버레이 위젯의 시간이 실시간 갱신되지 않는 문제 해결 (완료 ver 1.2.2)
 - [x] [🔨] (추가) 오버레이 롱 클릭, 더블 클릭시 앱으로 이동 (완료 ver 1.2.3)
-- [ ] [🔨] (추가) 메인, 위젯 셋팅 액티비티에 대한 생명주기 관리
+- [x] [🔨] (추가) 메인, 위젯 셋팅 액티비티에 대한 생명주기 관리 (완료 ver 1.2.4)
 - [ ] [🔨] 오버레이 뷰 디자인
 - [ ] [🔨] 앱 전체적인 디자인 
 - [ ] [🔨] 로고 제작
@@ -101,6 +101,13 @@ Send http request to that site via http. After that, the server time which is co
 오버레이 위젯을 길게 누르고 있거나 더블클릭하면 Background의 Main Activity가 foreground로 변경되며 화면에 띄움
 <img src="https://user-images.githubusercontent.com/56837413/74678590-c52fab00-51fe-11ea-8f4d-2727f1256398.gif" width="30%"></img>
  
+  <br/>
+  <br/>
+  <br/>
+  
+> ### ver 1.2.4 ( commit 2020-02-18 )  
+액티비티 별 생명주기 관리 및 제어 
+
   <br/>
   <br/>
   <br/>
