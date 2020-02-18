@@ -41,7 +41,7 @@ Send http request to that site via http. After that, the server time which is co
 - [x] [🔨] 오버레이 위젯 배경색 변경 기능 (완료 ver 1.2)
 - [x] [🔨] (추가) 오버레이 위젯의 시간이 실시간 갱신되지 않는 문제 해결 (완료 ver 1.2.2)
 - [x] [🔨] (추가) 오버레이 롱 클릭, 더블 클릭시 앱으로 이동 (완료 ver 1.2.3)
-- [x] [🔨] (추가) 메인, 위젯 셋팅 액티비티에 대한 생명주기 관리 (완료 ver 1.2.4)
+- [x] [🔨] (추가) 메인, 위젯 셋팅 액티비티에 대한 생명주기 관리 (완료 ver 1.2.4) (보완 ver 1.2.5)
 - [ ] [🔨] 오버레이 뷰 디자인
 - [ ] [🔨] 앱 전체적인 디자인 
 - [ ] [🔨] 로고 제작
@@ -107,6 +107,19 @@ Send http request to that site via http. After that, the server time which is co
   
 > ### ver 1.2.4 ( commit 2020-02-18 )  
 액티비티 별 생명주기 관리 및 제어 
+
+  <br/>
+  <br/>
+  <br/>
+  
+> ### ver 1.2.5 ( commit 2020-02-19 )  
+ - 위젯 셋팅 액티비티 화면에서 다른 앱화면이나 홈으로 전환 후 위젯 롱, 더블클릭을 통해 서버시간앱으로 전환시 메인 액티비티의 셋팅이 제대로 로드 되지 않는 문제가 있어, 어느 화면에서 위젯의 롱, 더블클릭을 통해 서버앱을 켜도 메인 액티비티의 기존 값들이 제대로 로드 되도록 수정  
+<img src="https://user-images.githubusercontent.com/56837413/74784423-3482c900-52eb-11ea-9493-dca110116a22.gif" width="30%"></img>
+  <br/>
+  <br/>
+  
+  - 위젯 셋팅 후 다시 셋팅 액티비티 실행시 기존에 셋팅해 두었던 셋팅 값들이 초기화 되는 문제가 있어, 셋팅 버튼 클릭시 기존에 셋팅이 되어있으면 그 셋팅을 다시 로드 해오도록 수정  
+<img src="https://user-images.githubusercontent.com/56837413/74784428-364c8c80-52eb-11ea-8c08-7e350f9346ce.gif" width="30%"></img>
 
   <br/>
   <br/>
