@@ -1,6 +1,7 @@
 package com.example.servertime;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -38,93 +39,24 @@ public class SetWidget extends AppCompatActivity {
     private View widview;
     TextView PopView;
     Spinner spinner;
+    RelativeLayout mpopView;
+    TextView widSize;
+    public static Activity activity;        //static에서 종료하기위해
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_widget);
-        final TextView widText = (TextView) MyService.mView.findViewById(R.id.textView);
-        View widView = (View) MyService.mView.findViewById(R.id.view);
-        //String color=widView.getResources().getString(R.color.White);
-        //String color2= widView.getDrawa
-        //String oriColor = "#" + Integer.toHexString(ContextCompat.getColor(widV, R.color.White) & 0x00ffffff);
 
-        String color22 = ((ColorDrawable) widView.getBackground()).getColor() + "";
-        ;
-        String oriColor = "-1";
+        activity=this;      //static에서 종료하기위해
+
+        widSize = (TextView) findViewById(R.id.WidSize);
+        widview = (View) MyService.mView.findViewById(R.id.view);
 
         SeekBar sb = (SeekBar) findViewById(R.id.seekBar);
-        final TextView widSize = (TextView) findViewById(R.id.WidSize);
-
-
-        //System.out.println("widText.getTextSize()="+widText.getTextSize()+"\ncolor22.equals(oriColor)=="+color22.equals(oriColor)+"-----------------------------------------------");
-        if (widText.getTextSize() == 70.0 && color22.equals(oriColor)) {               //켜져있는 위젯이 초기 설정과 같은경우
-            sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                public void onStopTrackingTouch(SeekBar seekBar) {
-                    System.out.println("***********widText.getTextSize()"+widText.getTextSize());
-
-                }
-
-                public void onStartTrackingTouch(SeekBar seekBar) {
-
-                }
-
-                public void onProgressChanged(SeekBar seekBar, int progress,
-                                              boolean fromUser) {
-                    widSize.setText("위젯 크기 : " + progress);
-                    progresses = progress;
-                    widview = (View) MyService.mView.findViewById(R.id.view);
-                    ViewGroup.LayoutParams wid = widview.getLayoutParams();
-                    RelativeLayout mpopView = (RelativeLayout) MyService.mView.findViewById(R.id.mPopView);
-
-
-                    PopView = (TextView) MyService.mView.findViewById(R.id.textView); //오버레이
-                    PopView.setTextSize(24 + progress);
-
-                    mpopView.setLayoutParams(new WindowManager.LayoutParams(PopView.getWidth() + 5, PopView.getHeight()));
-                    widview.setLayoutParams(new RelativeLayout.LayoutParams(PopView.getWidth() + 20, PopView.getHeight() + 5));
-                }
-            });
-
-
-        } else {          //새롭게 정한 설정이 있는경우
-
-            sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                public void onStopTrackingTouch(SeekBar seekBar) {
-
-                }
-
-                public void onStartTrackingTouch(SeekBar seekBar) {
-
-                }
-
-                public void onProgressChanged(SeekBar seekBar, int progress,
-                                              boolean fromUser) {
-                    widSize.setText("위젯 크기 : " + progress);
-                    progresses = progress;
-                    widview = (View) MyService.mView.findViewById(R.id.view);
-                    ViewGroup.LayoutParams wid = widview.getLayoutParams();
-                    RelativeLayout mpopView = (RelativeLayout) MyService.mView.findViewById(R.id.mPopView);
-
-                    //PopView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, widText.getTextSize());
-
-                    //PopView.getTextSize()
-                    //PopView = (TextView) MyService.mView.findViewById(R.id.textView); //오버레이
-                    //PopView.setTextSize(widText.getTextSize());
-                    PopView = (TextView) MyService.mView.findViewById(R.id.textView); //오버레이
-                    PopView.setTextSize(24 + progress);
-
-                    mpopView.setLayoutParams(new WindowManager.LayoutParams(PopView.getWidth() + 5, PopView.getHeight()));
-                    widview.setLayoutParams(new RelativeLayout.LayoutParams(PopView.getWidth() + 20, PopView.getHeight() + 5));
-                }
-            });
-
-
-        }
-
 
         //스피너 제어 부
-
         spinner = (Spinner) findViewById(R.id.spinner);
 
         String[] colorList = new String[5];
@@ -143,11 +75,9 @@ public class SetWidget extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String aa = spinner.getSelectedItem().toString();
+                //String aa = spinner.getSelectedItem().toString();
                 selColor = spinner.getSelectedItemPosition();
-
-                widview = (View) MyService.mView.findViewById(R.id.view);
-
+                MyService.selColor = selColor;
 
                 switch (selColor) {
                     case 0: {
@@ -192,7 +122,6 @@ public class SetWidget extends AppCompatActivity {
                         break;
                     }
                 }
-                //Toast.makeText(SetWidget.this, "111111111111="+selColor, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -202,6 +131,72 @@ public class SetWidget extends AppCompatActivity {
             }
         });
 
+        if(MyService.selColor==0 && MyService.progress == 0){          //셋팅 없이 초기값인 경우
+
+            sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    MyService.progress=progresses;
+                    mpopView.setLayoutParams(new WindowManager.LayoutParams(PopView.getWidth() + 5, PopView.getHeight()));
+                    widview.setLayoutParams(new RelativeLayout.LayoutParams(PopView.getWidth() + 20, PopView.getHeight() + 5));
+                }
+
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                public void onProgressChanged(SeekBar seekBar, int progress,
+                                              boolean fromUser) {
+                    widSize.setText("위젯 크기 : " + progress);
+                    progresses = progress;
+
+                    ViewGroup.LayoutParams wid = widview.getLayoutParams();
+                    mpopView = (RelativeLayout) MyService.mView.findViewById(R.id.mPopView);
+
+                    PopView = (TextView) MyService.mView.findViewById(R.id.textView); //오버레이
+                    PopView.setTextSize(24 + progress);
+
+                    mpopView.setLayoutParams(new WindowManager.LayoutParams(PopView.getWidth() + 5, PopView.getHeight()));
+                    widview.setLayoutParams(new RelativeLayout.LayoutParams(PopView.getWidth() + 20, PopView.getHeight() + 5));
+                }
+            });
+
+
+        } else {       //새롭게 정한 설정이 있는경우
+
+            //System.out.println("selected set------");
+            widSize.setText("위젯 크기 : " + MyService.progress);
+            sb.setProgress(MyService.progress);
+
+            sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    MyService.progress=progresses;
+                    mpopView.setLayoutParams(new WindowManager.LayoutParams(PopView.getWidth() + 5, PopView.getHeight()));
+                    widview.setLayoutParams(new RelativeLayout.LayoutParams(PopView.getWidth() + 20, PopView.getHeight() + 5));
+                }
+
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                public void onProgressChanged(SeekBar seekBar, int progress,
+                                              boolean fromUser) {
+                    widSize.setText("위젯 크기 : " + progress);
+                    progresses = progress;
+                    MyService.progress=progress;
+                    widview = (View) MyService.mView.findViewById(R.id.view);
+                    ViewGroup.LayoutParams wid = widview.getLayoutParams();
+                    mpopView = (RelativeLayout) MyService.mView.findViewById(R.id.mPopView);
+
+                    PopView = (TextView) MyService.mView.findViewById(R.id.textView); //오버레이
+                    PopView.setTextSize(24 + progress);
+
+                    mpopView.setLayoutParams(new WindowManager.LayoutParams(PopView.getWidth() + 5, PopView.getHeight()));
+                    widview.setLayoutParams(new RelativeLayout.LayoutParams(PopView.getWidth() + 20, PopView.getHeight() + 5));
+                }
+            });
+
+            spinner.setSelection(MyService.selColor);
+        }
 
     }
 
@@ -224,10 +219,14 @@ public class SetWidget extends AppCompatActivity {
         progresses = savedInstanceState.getInt("SELECTED_SIZE");
 
         spinner.setSelection(selColor);
-        PopView.setTextSize(24 + progresses);
+        //PopView.setTextSize(24 + progresses);
 
     }
 
+
+    public static void Destroy(){
+        activity.finish();
+    }
 
     @Override
     public void onBackPressed() {        //안드로이드 뒤로가기 버튼 눌렸을때
@@ -240,7 +239,6 @@ public class SetWidget extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case android.R.id.home:
-
                 finish(); //close the activty
                 return true;
         }

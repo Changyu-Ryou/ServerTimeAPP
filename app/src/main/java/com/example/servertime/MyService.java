@@ -21,6 +21,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Set;
+
 public class MyService extends Service {
 
     //private TextView mPopupView;
@@ -36,6 +38,12 @@ public class MyService extends Service {
     static WindowManager.LayoutParams params;
     static TextView tView;
     static int widFlag = 3;     //위젯 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
+
+
+    static int progress=0;
+    static int selColor=0;
+
+
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -88,6 +96,7 @@ public class MyService extends Service {
     }
 
 
+
     static Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (widFlag == 1) {
@@ -112,7 +121,10 @@ public class MyService extends Service {
         public boolean onLongClick(View view) {
             Toast.makeText(MyService.this, "서버시간 앱이 열립니다.\n 잠시만 기다려주세요",
                     Toast.LENGTH_SHORT).show();
+            SetWidget.activity.finish();        //위젯세팅 액티비티가 열려있다면 종료
             Intent intent = getPackageManager().getLaunchIntentForPackage("com.example.servertime");
+            //SetWidget.Destroy();
+
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
 
@@ -132,6 +144,7 @@ public class MyService extends Service {
             if (System.currentTimeMillis() <= btnPressTime + 1000) {    //서비스 시작
                 Toast.makeText(MyService.this, "서버시간 앱이 열립니다.\n 잠시만 기다려주세요",
                         Toast.LENGTH_SHORT).show();
+                SetWidget.activity.finish();      //위젯세팅 액티비티가 열려있다면 종료
                 Intent intent = getPackageManager().getLaunchIntentForPackage("com.example.servertime");
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
