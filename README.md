@@ -46,10 +46,13 @@ Send http request to that site via http. After that, the server time which is co
 - [x] [🔨] (추가) 오버레이 위젯의 예약 종료 기능적 구현 (완료 ver 1.3.1)
 - [x] [🔨] (추가) google AdMob 보상형 광고 삽입 (완료 ver 1.3.1)
 - [x] [🔨] (추가) 위젯 셋팅 액티비티 내 google AdMob 배너 광고 삽입 (완료 ver 1.3.1)
+- [x] [🔨] (추가) 사용자 가이드 팝업 액티비티 추가 (완료 ver 1.3.2)
 - [ ] [🔨] 오버레이 뷰 디자인
 - [ ] [🔨] 앱 전체적인 디자인 
 - [ ] [🔨] 로고 제작
 - [x] [🔒] google AdMob광고 배너 삽입 (완료 ver 1.2.1)
+- [ ] [🔓] Play Store 출시
+
   <br/> <br/>
   
 ## ☁️ Screen Shot
@@ -152,6 +155,18 @@ AdMob 보상형를 위한 광고 버튼 추가<br/>
  - 시간에 맞춰 예약을 하면 예약된 시간이 표기되고 시간에 맞춰 위젯과 서버 시간 받아오는 작업이 정지
 <img src="https://user-images.githubusercontent.com/56837413/74975328-3de66f80-546a-11ea-8838-251feb6ba09f.jpg" width="30%"></img>
 <img src="https://user-images.githubusercontent.com/56837413/74975332-3f179c80-546a-11ea-9e33-083340028fd4.gif" width="30%"></img>  
+
+  <br/>
+  <br/>
+  <br/>
+  
+> ### ver 1.3.2 ( commit 2020-02-21 )  
+액티비티의 상단 이름 변경<br/>
+메인 액티비티 액션바 버튼추가<br/>
+사용 가이드 팝업 액티비티 추가<br/>
+
+<img src="https://user-images.githubusercontent.com/56837413/74981662-04b3fc80-5476-11ea-9f57-2564cea77ed7.jpg" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/56837413/74981659-0382cf80-5476-11ea-9662-cd8d48073fea.jpg" width="30%"></img>
 
   <br/>
   <br/>
