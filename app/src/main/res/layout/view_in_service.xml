@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mPopView"
     android:layout_width="wrap_content"
+    android:layout_gravity="bottom|center"
+    android:layout_marginBottom="20dp"
     android:layout_height="wrap_content">
 
     <View

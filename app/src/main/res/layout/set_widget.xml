@@ -13,12 +13,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginRight="21dp"
         android:layout_marginLeft="20dp"
         android:text="위젯 크기 조절"
-        android:textSize="25dp" />
-
+        android:textSize="20dp"
+        android:textStyle="bold"/>
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -31,14 +31,18 @@
         android:max="10"
         android:progress="0" />
 
+
+
+
     <TextView
         android:id="@+id/ColorPick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/seekBar"
         android:text="색상 선택"
-        android:textSize="25dp"
-        android:layout_marginTop="30dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="21dp"
         android:layout_marginLeft="20dp"/>
@@ -56,12 +60,109 @@
         android:id="@+id/spinner"
         android:spinnerMode="dialog"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:background="@drawable/spinner_background"
+        android:layout_height="40dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="50dp"
         android:layout_below="@id/ColorPick"
         android:layout_toRightOf="@id/Color_image" />
+
+
+
+
+    <TextView
+        android:id="@+id/textResDestroy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="위젯 예약 종료 활성화"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/spinner" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="광고보기"
+        android:textSize="20dp"
+        android:layout_below="@id/spinner"
+        android:layout_toRightOf="@id/textResDestroy"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"    />
+
+
+    <TextView
+        android:id="@+id/textResDestroy2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="광고를 보고 정한 시간에 맞춰 자동으로 위젯을 화면에서 없앨 수 있습니다."
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/textResDestroy" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textResDestroy2"
+        android:orientation="vertical">
+
+        <TimePicker
+            android:id="@+id/TiemPicker"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner" />
+
+
+        <Spinner
+            android:id="@+id/TimeSpinner"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/spinner_background"
+            android:layout_toRightOf="@id/TiemPicker" />
+
+        <TextView
+            android:id="@+id/TextSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="초"
+            android:textSize="25dp"
+            android:layout_toRightOf="@id/TimeSpinner"
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="20dp"
+            />
+
+        <TextView
+            android:id="@+id/text_resTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="15dp"
+            android:text="위젯 종료 예정 시간"
+            android:layout_below="@id/TiemPicker" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="25dp"
+            android:text="00시 00분 00초"
+            android:textStyle="bold"
+            android:layout_below="@id/text_resTime" />
+
+
+
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

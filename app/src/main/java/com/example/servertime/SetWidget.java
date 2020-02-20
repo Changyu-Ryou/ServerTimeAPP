@@ -26,6 +26,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
+
 import org.w3c.dom.Text;
 
 import static com.example.servertime.R.color.Black;
@@ -39,15 +43,38 @@ public class SetWidget extends AppCompatActivity {
     private View widview;
     TextView PopView;
     Spinner spinner;
+    Spinner TimeSpinner;
     RelativeLayout mpopView;
     TextView widSize;
     public static Activity activity;        //static에서 종료하기위해
-
+    private RewardedAd rewardedAd;          //애드몹 보상형 광고
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_widget);
+
+
+        //보상형 광고
+        rewardedAd = new RewardedAd(this,
+                "ca-app-pub-3940256099942544/5224354917");      //TEST 아이디
+
+        RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
+            @Override
+            public void onRewardedAdLoaded() {
+                // Ad successfully loaded.
+            }
+
+            @Override
+            public void onRewardedAdFailedToLoad(int errorCode) {
+                // Ad failed to load.
+            }
+        };
+        rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
+
+
+
+
 
         activity=this;      //static에서 종료하기위해
 
@@ -57,7 +84,33 @@ public class SetWidget extends AppCompatActivity {
         SeekBar sb = (SeekBar) findViewById(R.id.seekBar);
 
         //스피너 제어 부
+        //시간용 스피너
+        TimeSpinner = (Spinner) findViewById(R.id.TimeSpinner);
+
+        String[] secondList = new String[12];
+        secondList[0] = "00";
+        secondList[1] = "05";
+        secondList[2] = "10";
+        secondList[3] = "15";
+        secondList[4] = "20";
+        secondList[5] = "25";
+        secondList[6] = "30";
+        secondList[7] = "35";
+        secondList[8] = "40";
+        secondList[9] = "45";
+        secondList[10] = "50";
+        secondList[11] = "55";
+
+        //using ArrayAdapter
+        ArrayAdapter TimespinnerAdapter;
+        TimespinnerAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, secondList);
+        TimeSpinner.setAdapter(TimespinnerAdapter);
+
+
+
+        //위젯 색상선택 스피너
         spinner = (Spinner) findViewById(R.id.spinner);
+
 
         String[] colorList = new String[5];
         colorList[0] = "White";
@@ -223,10 +276,6 @@ public class SetWidget extends AppCompatActivity {
 
     }
 
-
-    public static void Destroy(){
-        activity.finish();
-    }
 
     @Override
     public void onBackPressed() {        //안드로이드 뒤로가기 버튼 눌렸을때

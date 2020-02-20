@@ -217,6 +217,10 @@ public class MainActivity extends AppCompatActivity {
 
     //중지 버튼
     public void stopBtn(View view) {
+        MyService.progress=0;
+        MyService.selColor=0;
+
+
         checker = 1;      //handler 중지시키기
         widFlag = 1;      //위젯 중지시키기
         handler.removeCallbacks(null);      //handler 중지시키기
