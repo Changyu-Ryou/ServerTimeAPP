@@ -2,8 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mPopView"
     android:layout_width="wrap_content"
-    android:layout_gravity="bottom|center"
-    android:layout_marginBottom="20dp"
     android:layout_height="wrap_content">
 
     <View
@@ -19,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal|center_vertical"
+        android:layout_centerVertical="true"
         android:text="시간이 표시됩니다."
         android:textColor="#555555"
         android:textSize="20dp" />

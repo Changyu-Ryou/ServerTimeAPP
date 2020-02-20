@@ -58,28 +58,40 @@ public class MainActivity extends AppCompatActivity {
     private static final String STATE_CHECKER = "CHECKER_VALUE";      //체커 값
     private static final String WIDGET_FLAG = "WIDGET_VALUE";       //위젯 플래그 값
     private static final String URL_STATE = "URL_STATE";        //URL 링크 주소
-    private int checker = 3;      //http 헤더 받아오는 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
-    private int widFlag = 3;      //위젯 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
+    private static int checker = 3;      //http 헤더 받아오는 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
+    private static int widFlag = 3;      //위젯 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
     private String url = "";
     static View mView;      //view_in_service;
-    TextView explain;
-    TextView tv_outPut;
+    static TextView explain;
+    static TextView tv_outPut;
     TextView widSize;
     EditText URL_Link;
-    final Handler handler = new Handler();
+    String context = "";        //포멧 데이터를 스트링으로 저장
+    static final Handler handler = new Handler();
     private View header;
     private AdView mAdView;                     //구글 애드몹
     TextView PopView;
     static String contextForPopUp = "";        //팝업창 전용 포멧 데이터를 스트링으로 저장
     public static Context Context1;                   //다른 액티비티에서 onResume호출용
+    String formatForSchedule = "";          //예약종료 확인용 시간 포멧데이터를 스트링으로 저장
+    String SchDestroy = "";
+
+    static int ScheduleFlag = 0;         //예약종료설정 되어있는지 확인용 플래그
+    static String ScheduleTime = "";     //예약설정 시간
+    static int reward = 0;      //리워드 확인
+
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long backPressedTime = 0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Context1=this;
-
+        Context1 = this;
+        ScheduleFlag = 0;         //예약종료설정 되어있는지 확인용 플래그 초기화
+        ScheduleTime = "";        //예약종료시간 초기화
+        reward = 0;               //리워드 초기화
         //구글 애드몹
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -111,11 +123,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt(STATE_CHECKER,checker);
-        outState.putInt(WIDGET_FLAG,widFlag);
+        outState.putInt(STATE_CHECKER, checker);
+        outState.putInt(WIDGET_FLAG, widFlag);
 
-        String URL= URL_Link.getText().toString();
-        outState.putString(URL_STATE,URL);
+        String URL = URL_Link.getText().toString();
+        outState.putString(URL_STATE, URL);
 
 
         super.onSaveInstanceState(outState);
@@ -123,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState){
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
         checker = savedInstanceState.getInt(STATE_CHECKER);
@@ -152,11 +164,27 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        handler.removeMessages(0); //Handler 종료
-        Toast.makeText(MainActivity.this, "종료", Toast.LENGTH_SHORT).show();
-        moveTaskToBack(true);
-        finish();
-        android.os.Process.killProcess(android.os.Process.myPid());
+
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
+
+        if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime)
+        {
+
+            handler.removeMessages(0); //Handler 종료
+            Toast.makeText(MainActivity.this, "종료", Toast.LENGTH_SHORT).show();
+            moveTaskToBack(true);
+            finish();
+            android.os.Process.killProcess(android.os.Process.myPid());
+            super.onBackPressed();
+        }
+        else
+        {
+            backPressedTime = tempTime;
+            Toast.makeText(getApplicationContext(), "한번 더 누르시면 앱이 종료됩니다.\n위젯 이용을 원하시면 홈버튼을 눌러주세요", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     public void pastBtn(View view) {
@@ -217,8 +245,9 @@ public class MainActivity extends AppCompatActivity {
 
     //중지 버튼
     public void stopBtn(View view) {
-        MyService.progress=0;
-        MyService.selColor=0;
+        MyService.progress = 0;
+        MyService.selColor = 0;
+        ScheduleFlag = 0;
 
 
         checker = 1;      //handler 중지시키기
@@ -236,6 +265,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    void stopService() {
+        MyService.progress = 0;
+        MyService.selColor = 0;
+        ScheduleFlag = 0;
+
+
+        checker = 1;      //handler 중지시키기
+        widFlag = 1;      //위젯 중지시키기
+        handler.removeCallbacks(null);      //handler 중지시키기
+
+        MyService.stopWidget();
+        SetWidget.activity.finish();        //세팅위젯 액티비티 종료
+
+        explain.setText("서버 시간이 아래에 표시됩니다.");
+        tv_outPut.setText("");
+
+        //오버레이 중지
+        stopService(new Intent(this, MyService.class));
+
+    }
 
 
     //위젯 버튼
@@ -278,8 +327,8 @@ public class MainActivity extends AppCompatActivity {
             SimpleDateFormat formatChange = new SimpleDateFormat("yyyy년 M월 d일\nkk시 mm분 ss초", Locale.KOREA);
             SimpleDateFormat formatCheck = new SimpleDateFormat("mm", Locale.KOREA);
             SimpleDateFormat formatForPopUp = new SimpleDateFormat("kk시 mm분 ss초", Locale.KOREA);
-            SimpleDateFormat formatKorea = new SimpleDateFormat("E, d MMM yyyy k:m:s z", Locale.KOREA);
-            String context = "";        //포멧 데이터를 스트링으로 저장
+            SimpleDateFormat formatForSche = new SimpleDateFormat("k시 m분 ss초", Locale.KOREA);
+
 
             try {
                 Log.d(this.getClass().getName(), "start the NetworkTask");
@@ -287,7 +336,7 @@ public class MainActivity extends AppCompatActivity {
                 URLConnection conn = obj.openConnection();
                 Map<String, List<String>> map = conn.getHeaderFields();
 
-                System.out.println("\n---------Printing Response Header...\n");
+                //System.out.println("\n---------Printing Response Header...\n");
 
                 for (Map.Entry<String, List<String>> entry : map.entrySet()) {
                     if (StringUtils.equals(entry.getKey(), "Date")) {
@@ -299,13 +348,14 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "서버 시간을 가져올 수 없는 주소입니다.\n주소를 다시 확인해 주세요", Toast.LENGTH_SHORT).show();
                                 break;
                             }
-                            System.out.println(value);
+                            //System.out.println(value);
 
-                            System.out.println(formatKorea.format(serverTime));
+                            //System.out.println(formatKorea.format(serverTime));       //시간출력
                             //context = formatKorea.format(serverTime);
                             context = formatChange.format(serverTime);
                             contextForPopUp = formatForPopUp.format(serverTime);
-                            System.out.println("===============================");
+                            formatForSchedule = formatForSche.format(serverTime);
+                            //System.out.println("===============================");
                         }
                     }
                 }
@@ -326,11 +376,16 @@ public class MainActivity extends AppCompatActivity {
 
                 //TextView tv_outPut = (TextView) findViewById(R.id.tv_outPut);
                 tv_outPut.setText(context);
+                if (ScheduleFlag == 1)     //예약종료설정 되어있는지 확인용 플래그(1=설정됨, 0=미설정)
+                    if (ScheduleTime.equals(formatForSchedule)) {
+                        stopService();
+                    }
+
                 //오버레이에도 시간표시
                 //PopView.setText(context);
                 //MyService.tView.setText(contextForPopUp);
 
-                System.out.println("done---");
+                //System.out.println("done---");
             } catch (
                     Exception e) {
                 e.printStackTrace();

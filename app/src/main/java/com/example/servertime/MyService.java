@@ -1,5 +1,6 @@
 package com.example.servertime;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -33,15 +34,15 @@ public class MyService extends Service {
     static Context MainContext;
 
     private long btnPressTime = 0;        //더블클릭 확인용 변수
-    WindowManager wm;
+    static WindowManager wm;
     static View mView;
     static WindowManager.LayoutParams params;
     static TextView tView;
     static int widFlag = 3;     //위젯 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
 
 
-    static int progress=0;
-    static int selColor=0;
+    static int progress=0;      //위젯 크기 설정 변수
+    static int selColor=0;      //위젯 색상 설정 변수
 
 
 
@@ -68,6 +69,7 @@ public class MyService extends Service {
 
         params.gravity = Gravity.LEFT | Gravity.TOP;
         wm.addView(mView, params);
+
 
         //뷰 터치 리스너
         tView = (TextView) mView.findViewById(R.id.textView);
@@ -100,11 +102,23 @@ public class MyService extends Service {
     static Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (widFlag == 1) {
-                mHandler.removeMessages(0);
+                mHandler.removeMessages(0);         //핸들러 종료
             }
             String widgetTime = MainActivity.gettime();
             tView.setText(widgetTime);
             System.out.println("위젯 스레드 작동중");
+            /*
+            if(ScheduleFlag==1){
+                if(widgetTime.equals(ScheduleTime)){
+                        //MainActivity.stopService();
+                    //wm.removeView(mView);
+                    //mView=null;
+                    //wm = null;
+                        //activity.finish();
+                    widFlag = 1;
+                    mHandler.removeMessages(0);
+                }
+            }*/
 
             // 메세지를 처리하고 또다시 핸들러에 메세지 전달 (1000ms 지연)
             mHandler.sendEmptyMessageDelayed(0, 100);
@@ -115,6 +129,7 @@ public class MyService extends Service {
         widFlag = 1;
         mHandler.removeMessages(0);
     }
+
 
     private View.OnLongClickListener mViewLongClickListener = new View.OnLongClickListener() {
         @Override
@@ -190,7 +205,6 @@ public class MyService extends Service {
     }
 
     private void optimizePosition() {
-        //ÃÖ´ë°ª ³Ñ¾î°¡Áö ¾Ê°Ô ¼³Á¤
         if (params.x > MAX_X) params.x = MAX_X;
         if (params.y > MAX_Y) params.y = MAX_Y;
         if (params.x < 0) params.x = 0;

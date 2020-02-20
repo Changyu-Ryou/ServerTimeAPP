@@ -49,12 +49,11 @@
 
     <ImageView
         android:id="@+id/Color_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/ColorPick"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/myshape_black"
-        android:layout_below="@+id/ColorPick" />
+        android:background="@drawable/myshape_white" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -84,21 +83,43 @@
         android:layout_below="@id/spinner" />
 
     <Button
+        android:id="@+id/adBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="광고보기"
         android:textSize="20dp"
         android:layout_below="@id/spinner"
-        android:layout_toRightOf="@id/textResDestroy"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"    />
+        android:layout_marginLeft="30dp"
+        android:onClick="Adview"
+        />
+
+    <Button
+        android:id="@+id/ScheduleBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ED0074"
+        android:text="위젯 종료 예약"
+
+        android:textSize="20dp"
+        android:layout_below="@id/spinner"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:onClick="Schedule"
+        />
 
 
     <TextView
         android:id="@+id/textResDestroy2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="광고를 보고 정한 시간에 맞춰 자동으로 위젯을 화면에서 없앨 수 있습니다."
+        android:text="광고를 보고 정한 시간에 맞춰 \n자동으로 위젯을 없앨 수 있습니다."
         android:textSize="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
@@ -141,28 +162,50 @@
             />
 
         <TextView
-            android:id="@+id/text_resTime"
+            android:id="@+id/ex_Time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
             android:textSize="15dp"
             android:text="위젯 종료 예정 시간"
-            android:layout_below="@id/TiemPicker" />
+           />
 
         <TextView
+            android:id="@+id/text_SchTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:textSize="25dp"
             android:text="00시 00분 00초"
             android:textStyle="bold"
-            android:layout_below="@id/text_resTime" />
+            android:layout_below="@id/ex_Time" />
 
+        <TextView
+            android:id="@+id/explainTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+
+            android:textSize="15dp"
+            android:text="앱 종료시 예약시간이 초기화 됩니다. \n 예약 후에는 홈 버튼(□)을 클릭해 사용해 주세요"
+            android:layout_below="@id/TiemPicker" />
 
 
 
 
     </RelativeLayout>
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+    </com.google.android.gms.ads.AdView>
 
 
 </RelativeLayout>
