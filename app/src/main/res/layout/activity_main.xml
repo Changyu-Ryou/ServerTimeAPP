@@ -96,7 +96,7 @@
         android:textSize="20dp" />
 
 
-    //시간 출력 부분
+    <!--시간 출력 부분  -->
 
     <TextView
         android:id="@+id/tv_outPut"
@@ -132,7 +132,7 @@
         android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
         android:layout_above="@id/adView"
-        android:text="*안내* \n시계가 비정상적으로 작동시, \n사이트의 정확한 전체 주소를 붙여넣어 주세요"
+        android:text="*안내* \n시계가 비정상적으로 작동시, \n사이트의 메인 홈 주소를 붙여넣어 주세요"
         android:textSize="15dp" />
 
     <com.google.android.gms.ads.AdView

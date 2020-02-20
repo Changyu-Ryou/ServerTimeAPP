@@ -5,10 +5,8 @@ import android.annotation.TargetApi;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -16,14 +14,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +26,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
@@ -47,10 +40,6 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -92,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         ScheduleFlag = 0;         //예약종료설정 되어있는지 확인용 플래그 초기화
         ScheduleTime = "";        //예약종료시간 초기화
         reward = 0;               //리워드 초기화
+
+
         //구글 애드몹
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -168,8 +159,7 @@ public class MainActivity extends AppCompatActivity {
         long tempTime = System.currentTimeMillis();
         long intervalTime = tempTime - backPressedTime;
 
-        if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime)
-        {
+        if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
 
             handler.removeMessages(0); //Handler 종료
             Toast.makeText(MainActivity.this, "종료", Toast.LENGTH_SHORT).show();
@@ -177,9 +167,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             android.os.Process.killProcess(android.os.Process.myPid());
             super.onBackPressed();
-        }
-        else
-        {
+        } else {
             backPressedTime = tempTime;
             Toast.makeText(getApplicationContext(), "한번 더 누르시면 앱이 종료됩니다.\n위젯 이용을 원하시면 홈버튼을 눌러주세요", Toast.LENGTH_SHORT).show();
         }
@@ -424,4 +412,27 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionbar_actions, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_info:
+                startActivity(new Intent(this, PopupGuideActivity.class));
+                break;
+
+            default:
+                break;
+
+        }
+        return true;
+    }
+
 }

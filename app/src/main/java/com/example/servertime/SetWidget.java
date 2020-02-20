@@ -80,6 +80,10 @@ public class SetWidget extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_widget);
 
+        ActionBar ab = getSupportActionBar() ;
+        ab.setTitle("위젯 사용 설정") ;
+
+
         activity = this;      //static에서 종료하기위해
 
         rewardedAd = new RewardedAd(this,
@@ -438,7 +442,7 @@ public class SetWidget extends AppCompatActivity {
             rewardedAd.show(activityContext, adCallback);
         } else {
             Log.d("TAG", "The rewarded ad wasn't loaded yet.");
-            Toast.makeText(this, "광고를 로드중에 있습니다.\n잠시후 로딩이 끝납니다.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "광고를 로드중에 있습니다.\n잠시후 로딩이 끝납니다.", Toast.LENGTH_SHORT).show();
             //onRewardedAdClosed();
         }
         if (adloadFlag == 1){

@@ -189,7 +189,7 @@
             android:layout_marginTop="30dp"
 
             android:textSize="15dp"
-            android:text="앱 종료시 예약시간이 초기화 됩니다. \n 예약 후에는 홈 버튼(□)을 클릭해 사용해 주세요"
+            android:text="앱 종료시 예약시간이 초기화 됩니다.\n예약 후에는 홈 버튼(□)을 클릭해 사용해 주세요"
             android:layout_below="@id/TiemPicker" />
 
 

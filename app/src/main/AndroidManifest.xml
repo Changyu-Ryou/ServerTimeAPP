@@ -8,12 +8,16 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="서버 시간 알리미"
         android:launchMode="singleTop"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@menu/actionbar_actions" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,17 +32,15 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <activity android:name=".PopupGuideActivity"
+            android:theme="@android:style/Theme.Holo.Dialog"/>
         <service
             android:name=".MyService"
             android:enabled="true"
-            android:permission="android.permission.SYSTEM_ALERT_WINDOW"></service>
-
-
-        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+            android:permission="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
-
     </application>
 
 </manifest>
