@@ -43,8 +43,9 @@ Send http request to that site via http. After that, the server time which is co
 - [x] [🔨] (추가) 오버레이 롱 클릭, 더블 클릭시 앱으로 이동 (완료 ver 1.2.3)
 - [x] [🔨] (추가) 메인, 위젯 셋팅 액티비티에 대한 생명주기 관리 (완료 ver 1.2.4) (보완 ver 1.2.5)
 - [x] [🔨] (추가) 오버레이 위젯의 예약 종료 기능을 위한 UI 구현 (완료 ver 1.3)
-- [ ] [🔨] (추가) 오버레이 위젯의 예약 종료 기능적 구현
-- [ ] [🔨] (추가) google AdMob 보상형 광고 삽입
+- [x] [🔨] (추가) 오버레이 위젯의 예약 종료 기능적 구현 (완료 ver 1.3.1)
+- [x] [🔨] (추가) google AdMob 보상형 광고 삽입 (완료 ver 1.3.1)
+- [x] [🔨] (추가) 위젯 셋팅 액티비티 내 google AdMob 배너 광고 삽입 (완료 ver 1.3.1)
 - [ ] [🔨] 오버레이 뷰 디자인
 - [ ] [🔨] 앱 전체적인 디자인 
 - [ ] [🔨] 로고 제작
@@ -133,6 +134,24 @@ Send http request to that site via http. After that, the server time which is co
 AdMob 보상형를 위한 광고 버튼 추가<br/>
 (예약종료기능은 구현중)<br/>
 <img src="https://user-images.githubusercontent.com/56837413/74933982-9006a100-5428-11ea-9264-51bf7ad8b13c.jpg" width="30%"></img>
+
+  <br/>
+  <br/>
+  <br/>
+  
+> ### ver 1.3.1 ( commit 2020-02-21 )  
+오버레이 위젯 예약종료 기능 구현 완료<br/>
+보상형 광고 구현<br/>
+위젯 세팅 액티비티 내 배너광고 구현<br/>  <br/>
+ - 광고를 보지 않았다면, 광고보기 버튼이 / 광고를 봤지만 예약하지 않았다면, 예약하기 버튼이 활성화
+<img src="https://user-images.githubusercontent.com/56837413/74975319-3aeb7f00-546a-11ea-953f-07151c732ef8.jpg" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/56837413/74975321-3c1cac00-546a-11ea-99a5-00ec782cf388.jpg" width="30%"></img>  
+<br/>
+<br/>  
+
+ - 시간에 맞춰 예약을 하면 예약된 시간이 표기되고 시간에 맞춰 위젯과 서버 시간 받아오는 작업이 정지
+<img src="https://user-images.githubusercontent.com/56837413/74975328-3de66f80-546a-11ea-8838-251feb6ba09f.jpg" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/56837413/74975332-3f179c80-546a-11ea-9e33-083340028fd4.gif" width="30%"></img>  
 
   <br/>
   <br/>
