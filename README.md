@@ -47,11 +47,11 @@ Send http request to that site via http. After that, the server time which is co
 - [x] [🔨] (추가) google AdMob 보상형 광고 삽입 (완료 ver 1.3.1)
 - [x] [🔨] (추가) 위젯 셋팅 액티비티 내 google AdMob 배너 광고 삽입 (완료 ver 1.3.1)
 - [x] [🔨] (추가) 사용자 가이드 팝업 액티비티 추가 (완료 ver 1.3.2)
-- [ ] [🔨] 오버레이 뷰 디자인
-- [ ] [🔨] 앱 전체적인 디자인 
-- [ ] [🔨] 로고 제작
+- [x] [🔨] 오버레이 뷰 디자인 (최종 ver 1.4.0)
+- [x] [🔨] 앱 전체적인 디자인 ( ver 1.4.0)
+- [x] [🔨] 로고 제작 (완료 ver 1.4.0)
 - [x] [🔒] google AdMob광고 배너 삽입 (완료 ver 1.2.1)
-- [ ] [🔓] Play Store 출시
+- [x] [🔓] Play Store 출시 (완료 ver 1.4.0)
 
   <br/> <br/>
   
@@ -67,7 +67,8 @@ Send http request to that site via http. After that, the server time which is co
   <br/>
   
 > ### ver 1.1 ( commit 2020-02-15 )  
-오버레이 위젯 핵심 기능 구현  
+오버레이 위젯 핵심 기능 구현<br/>
+위젯 이동 구현 (출처 : http://blog.daum.net/mailss/35 )  
 <img src="https://user-images.githubusercontent.com/56837413/74565281-40e9e780-4fb4-11ea-833e-55d963597bd4.jpg" width="30%"></img>
 <img src="https://user-images.githubusercontent.com/56837413/74565288-447d6e80-4fb4-11ea-8a17-03bcf82eea31.jpg" width="30%"></img>
 <img src="https://user-images.githubusercontent.com/56837413/74565293-48a98c00-4fb4-11ea-9b0f-7a4284aafe65.jpg" width="30%"></img>
@@ -146,13 +147,13 @@ AdMob 보상형를 위한 광고 버튼 추가<br/>
 오버레이 위젯 예약종료 기능 구현 완료<br/>
 보상형 광고 구현<br/>
 위젯 세팅 액티비티 내 배너광고 구현<br/>  <br/>
- - 광고를 보지 않았다면, 광고보기 버튼이 / 광고를 봤지만 예약하지 않았다면, 예약하기 버튼이 활성화
+ - 광고를 보지 않았다면, 광고보기 버튼이 / 광고를 봤지만 예약하지 않았다면, 예약하기 버튼이 활성화<br/>
 <img src="https://user-images.githubusercontent.com/56837413/74975319-3aeb7f00-546a-11ea-953f-07151c732ef8.jpg" width="30%"></img>
 <img src="https://user-images.githubusercontent.com/56837413/74975321-3c1cac00-546a-11ea-99a5-00ec782cf388.jpg" width="30%"></img>  
 <br/>
 <br/>  
 
- - 시간에 맞춰 예약을 하면 예약된 시간이 표기되고 시간에 맞춰 위젯과 서버 시간 받아오는 작업이 정지
+ - 시간에 맞춰 예약을 하면 예약된 시간이 표기되고 시간에 맞춰 위젯과 서버 시간 받아오는 작업이 정지<br/>
 <img src="https://user-images.githubusercontent.com/56837413/74975328-3de66f80-546a-11ea-8838-251feb6ba09f.jpg" width="30%"></img>
 <img src="https://user-images.githubusercontent.com/56837413/74975332-3f179c80-546a-11ea-9e33-083340028fd4.gif" width="30%"></img>  
 
@@ -167,6 +168,30 @@ AdMob 보상형를 위한 광고 버튼 추가<br/>
 
 <img src="https://user-images.githubusercontent.com/56837413/74981662-04b3fc80-5476-11ea-9f57-2564cea77ed7.jpg" width="30%"></img>
 <img src="https://user-images.githubusercontent.com/56837413/74981659-0382cf80-5476-11ea-9662-cd8d48073fea.jpg" width="30%"></img>
+
+  <br/>
+  <br/>
+  <br/>
+  
+> ### ver 1.4.0 ( commit 2020-02-22 )  
+앱 로고 아이콘 추가<br/>
+위젯 버그 수정<br/>
+앱스토어 출시용 소개 이미지 제작<br/>
+ - 깃허브 업로드 이후 AdMob app ID, 광고ID 기존의 '테스트 아이디'에서 '개인 아이디'로 변경
+<br/>
+> icon <br/>
+<img src="https://user-images.githubusercontent.com/56837413/75077226-7c9d2800-5545-11ea-8e98-d0c6c27ad08e.png" width="30%"></img>
+<br/><br/>
+
+>앱 소개 이미지 <br/>
+<img src="https://user-images.githubusercontent.com/56837413/75077281-9b9bba00-5545-11ea-8e2b-3b3a5d66f4f4.png" width="91%"></img><br/>
+<img src="https://user-images.githubusercontent.com/56837413/75077270-950d4280-5545-11ea-9ef5-1ff4f7e7ae94.png" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/56837413/75077273-963e6f80-5545-11ea-84e7-bf75fbb9d43a.png" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/56837413/75077275-976f9c80-5545-11ea-8f45-a6f29181d1e9.png" width="30%"></img><br/>
+<img src="https://user-images.githubusercontent.com/56837413/75077277-98a0c980-5545-11ea-9310-97ad88d24dd0.png" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/56837413/75077280-9b032380-5545-11ea-8b16-8414836c4861.png" width="30%"></img>
+
+
 
   <br/>
   <br/>
