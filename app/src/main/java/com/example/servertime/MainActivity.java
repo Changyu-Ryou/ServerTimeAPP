@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,27 +49,27 @@ public class MainActivity extends AppCompatActivity {
     private static int checker = 3;      //http 헤더 받아오는 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
     private static int widFlag = 3;      //위젯 백그라운드 작동 ( 0=실행 , 1=중지, 초기설정 = 3 )
     private String url = "";
-    static View mView;      //view_in_service;
+
     static TextView explain;
     static TextView tv_outPut;
     TextView widSize;
     EditText URL_Link;
     String context = "";        //포멧 데이터를 스트링으로 저장
     static final Handler handler = new Handler();
-    private View header;
+
     private AdView mAdView;                     //구글 애드몹
-    TextView PopView;
+
     static String contextForPopUp = "";        //팝업창 전용 포멧 데이터를 스트링으로 저장
     public static Context Context1;                   //다른 액티비티에서 onResume호출용
     String formatForSchedule = "";          //예약종료 확인용 시간 포멧데이터를 스트링으로 저장
-    String SchDestroy = "";
+
 
     static int ScheduleFlag = 0;         //예약종료설정 되어있는지 확인용 플래그
     static String ScheduleTime = "";     //예약설정 시간
     static int reward = 0;      //리워드 확인
 
-    private final long FINISH_INTERVAL_TIME = 2000;
-    private long backPressedTime = 0;
+    private final long FINISH_INTERVAL_TIME = 2000;     //두번누르면 종료시키기 위한 변수
+    private long backPressedTime = 0;           //두번누르면 종료시키기 위한 변수
 
 
     @Override
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         tv_outPut = (TextView) findViewById(R.id.tv_outPut);
         widSize = (TextView) findViewById(R.id.WidSize);
         URL_Link = (EditText) findViewById(R.id.UrlText);
-        header = getLayoutInflater().inflate(R.layout.view_in_service, null, false);
+
         //header.findViewById(R.id.textView);
 
         if (savedInstanceState != null) {
@@ -175,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void pastBtn(View view) {
+    public void pastBtn(View view) {        //붙여넣기 버튼
         //클립보드 관리자 객체를 가져옴
         ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         //클립보드에 값이 없으면
@@ -221,8 +220,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (checker == 0) {
-                    NetworkTask networkTask = new NetworkTask();
-                    networkTask.execute();
+                    GetHeader getHeader = new GetHeader();
+                    getHeader.execute();
 
                     handler.postDelayed(this, 100);      //delayMillis마다 무한 반복
                 }
@@ -252,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
         stopService(new Intent(MainActivity.this, MyService.class));
 
     }
+
 
     void stopService() {
         MyService.progress = 0;
@@ -283,6 +283,7 @@ public class MainActivity extends AppCompatActivity {
             MyService.startWidget(this);
             checkPermission();
             widFlag = 0;
+            Toast.makeText(MainActivity.this, "위젯을 더블클릭하거나 길게 누르면.\n앱 메인화면으로 이동합니다", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(MainActivity.this, "서버시간이 작동하고 있지 않습니다.\n시작 버튼을 눌러 작동시켜주세요", Toast.LENGTH_SHORT).show();
         }
@@ -300,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public class NetworkTask extends AsyncTask<Void, Void, String> {
+    public class GetHeader extends AsyncTask<Void, Void, String> {
         @SuppressLint("WrongThread")
         @Override
         protected String doInBackground(Void... voids) {
@@ -319,12 +320,9 @@ public class MainActivity extends AppCompatActivity {
 
 
             try {
-                Log.d(this.getClass().getName(), "start the NetworkTask");
                 URL obj = new URL(url);
                 URLConnection conn = obj.openConnection();
                 Map<String, List<String>> map = conn.getHeaderFields();
-
-                //System.out.println("\n---------Printing Response Header...\n");
 
                 for (Map.Entry<String, List<String>> entry : map.entrySet()) {
                     if (StringUtils.equals(entry.getKey(), "Date")) {
@@ -336,44 +334,19 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "서버 시간을 가져올 수 없는 주소입니다.\n주소를 다시 확인해 주세요", Toast.LENGTH_SHORT).show();
                                 break;
                             }
-                            //System.out.println(value);
-
-                            //System.out.println(formatKorea.format(serverTime));       //시간출력
-                            //context = formatKorea.format(serverTime);
                             context = formatChange.format(serverTime);
                             contextForPopUp = formatForPopUp.format(serverTime);
                             formatForSchedule = formatForSche.format(serverTime);
-                            //System.out.println("===============================");
                         }
                     }
                 }
-/*              //아래는 헤더들의 내용을 더 알 수 있음
-                System.out.println("\n\n\nGet Response Header By Key ...\n");
-                String server = conn.getHeaderField("Server");
 
-                if (server == null) {
-                    System.out.println("Key 'Server' is not found!");
-                } else {
-                    System.out.println("Server - " + server);
-                }
-                System.out.println("\n Done");
-                context+="";
-                System.out.println(context +"\n ---");
-
- */
-
-                //TextView tv_outPut = (TextView) findViewById(R.id.tv_outPut);
                 tv_outPut.setText(context);
                 if (ScheduleFlag == 1)     //예약종료설정 되어있는지 확인용 플래그(1=설정됨, 0=미설정)
                     if (ScheduleTime.equals(formatForSchedule)) {
                         stopService();
                     }
 
-                //오버레이에도 시간표시
-                //PopView.setText(context);
-                //MyService.tView.setText(contextForPopUp);
-
-                //System.out.println("done---");
             } catch (
                     Exception e) {
                 e.printStackTrace();
@@ -413,7 +386,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.actionbar_actions, menu);
@@ -427,12 +399,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_info:
                 startActivity(new Intent(this, PopupGuideActivity.class));
                 break;
-
             default:
                 break;
-
         }
         return true;
     }
-
 }

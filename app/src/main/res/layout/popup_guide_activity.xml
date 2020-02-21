@@ -16,7 +16,7 @@
             android:textSize="20sp"
             android:textColor="#fff"
             android:gravity="center"
-            android:background="#ff7a00"
+            android:background="#5587A2"
             android:layout_width="match_parent"
             android:layout_height="53dp" />
 
@@ -44,7 +44,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="400dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,13 +55,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/Black"
-                android:text="1. 원하는 사이트 주소를 https:// 뒤에 붙여넣는다.\n\n
+                android:text="1. 원하는 사이트 주소를 https:// 뒤에 붙여넣는다.\n
+꼭 'https://'가 주소 앞에 있어야 한다.\n\n
 2. 시작버튼을 누르면 사이트에서 서버 시간을 받아와 보여준다. \n\n
 3. '위젯'버튼을 누르면 어디서든 볼 수 있는 위젯이 뜬다.\n\n
 4. 위젯을 원하는 시간에 맞춰 종료하기 위해 '위젯 사용 설정>광고보기'를 눌러 예약 종료기능을 활성화 시킨다.\n\n
 * 시작 버튼 클릭 후 바로 뜨지 않으면 사이트 주소 입력 오류일 가능성이
 높습니다. 사이트 메인 주소를 다시 확인하고 재입력해 주세요\n\n
-예) http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=9999999(X)\n
+예) http://ticket.interpark.com/Ticket/GoodsCode=9999 (X)\n
 http://ticket.interpark.com/ (O)"
                 android:textSize="20dp"/>
 

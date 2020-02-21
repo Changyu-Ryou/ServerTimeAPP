@@ -1,16 +1,9 @@
 package com.example.servertime;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -41,15 +33,12 @@ import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
-import org.w3c.dom.Text;
-
-import static com.example.servertime.R.color.Black;
 
 public class SetWidget extends AppCompatActivity {
 
     int progresses = 0;
     int selColor = 0;
-    int selColorT = 0;
+
     private View widview;
     TextView PopView;
     Spinner spinner;
@@ -61,7 +50,6 @@ public class SetWidget extends AppCompatActivity {
     private AdView mAdView;                     //구글 애드몹 배너형 광고
 
     TimePicker mTimePicker;
-    Spinner mSecondPicker;
     String Hour;
     String Minute;
     String Second;
@@ -453,7 +441,7 @@ public class SetWidget extends AppCompatActivity {
         }
     }
 
-
+    //보상형 광고 로드
     public static RewardedAd createAndLoadRewardedAd() {
         RewardedAd rewardedAd = new RewardedAd(activity,
                 "ca-app-pub-3940256099942544/5224354917");

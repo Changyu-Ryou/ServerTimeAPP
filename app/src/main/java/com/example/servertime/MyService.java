@@ -1,11 +1,7 @@
 package com.example.servertime;
 
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.PendingIntent;
+
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -22,11 +18,11 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Set;
+
 
 public class MyService extends Service {
 
-    //private TextView mPopupView;
+
     private float START_X, START_Y;
     private int PREV_X, PREV_Y;
     private int MAX_X = -1, MAX_Y = -1;
@@ -74,7 +70,6 @@ public class MyService extends Service {
         //뷰 터치 리스너
         tView = (TextView) mView.findViewById(R.id.textView);
 
-        //final View view = (View) mView.findViewById(R.id.view);
         final View view = (View) mView.findViewById(R.id.view);
         view.setOnLongClickListener(mViewLongClickListener);
         view.setOnClickListener(mViewClickListener);
@@ -85,11 +80,9 @@ public class MyService extends Service {
 
     public static void startWidget(Context context) {
         widFlag = 0;
-        String widgetTime = MainActivity.gettime();
-        String oriText = "시간이 표시됩니다.";
+
         MainContext = context;
         try {
-            //tView.setText("시간표기");
             mHandler.sendEmptyMessageDelayed(0, 100);
         } catch (Exception e) {
             System.out.println("waitLoading() 오류");
@@ -136,9 +129,8 @@ public class MyService extends Service {
         public boolean onLongClick(View view) {
             Toast.makeText(MyService.this, "서버시간 앱이 열립니다.\n 잠시만 기다려주세요",
                     Toast.LENGTH_SHORT).show();
-            SetWidget.activity.finish();        //위젯세팅 액티비티가 열려있다면 종료
+            //SetWidget.activity.finish();        //위젯세팅 액티비티가 열려있다면 종료
             Intent intent = getPackageManager().getLaunchIntentForPackage("com.example.servertime");
-            //SetWidget.Destroy();
 
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
@@ -149,6 +141,7 @@ public class MyService extends Service {
     };
 
 
+    //위젯 더블클릭시 메인 액티비티 실행
     private View.OnClickListener mViewClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -159,7 +152,7 @@ public class MyService extends Service {
             if (System.currentTimeMillis() <= btnPressTime + 1000) {    //서비스 시작
                 Toast.makeText(MyService.this, "서버시간 앱이 열립니다.\n 잠시만 기다려주세요",
                         Toast.LENGTH_SHORT).show();
-                SetWidget.activity.finish();      //위젯세팅 액티비티가 열려있다면 종료
+                //SetWidget.activity.finish();      //위젯세팅 액티비티가 열려있다면 종료
                 Intent intent = getPackageManager().getLaunchIntentForPackage("com.example.servertime");
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
@@ -169,6 +162,7 @@ public class MyService extends Service {
     };
 
 
+    //위젯 롱터치시 메인 액티비티 실행
     private View.OnTouchListener mViewTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
@@ -196,6 +190,8 @@ public class MyService extends Service {
         }
     };
 
+
+    //위젯 이동 배치 출처
     private void setMaxPosition() {
         DisplayMetrics matrix = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(matrix);
@@ -211,8 +207,11 @@ public class MyService extends Service {
         if (params.y < 0) params.y = 0;
     }
 
+
+
+    //종료
     @Override
-    public void onDestroy() {               //MainActivity 꺼지면 다 종료
+    public void onDestroy() {
         super.onDestroy();
         if (wm != null) {
             if (mView != null) {

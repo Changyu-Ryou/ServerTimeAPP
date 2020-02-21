@@ -15,7 +15,7 @@ public class PopupGuideActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);      //상단 액션바 제거
         setContentView(R.layout.popup_guide_activity);
         btn1 = (Button) findViewById(R.id.mOnClose);
         btn1.setOnClickListener(new View.OnClickListener() {
