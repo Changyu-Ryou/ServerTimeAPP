@@ -16,7 +16,7 @@ Send http request to that site via http. After that, the server time which is co
 ## 👨‍💻 System requirements
 기본적으로 Android Studio에서 JAVA언어 기반으로 개발을 진행합니다.  
 이를위해 Android Studio 설치가 필수적입니다.  
-또한 안드로이드 SDK Android 8.1 오레오 API Level 21 이상에서 개발합니다.
+또한 안드로이드 SDK Android 8.1 오레오 API Level 29를 타겟 API로 제작합니다.
   <br/><br/>
 ## 📝 Todo list
 제작할 코드와 문서들입니다.
@@ -194,6 +194,12 @@ AdMob 보상형를 위한 광고 버튼 추가<br/>
 
 
   <br/>
+  <br/>
+  <br/>
+  
+> ### ver 1.4.1 ( commit 2020-02-25 )  
+Play Store 앱 출시 후 위젯 버그가 발견되어 수정.<br/>
+
   <br/>
   <br/>
   
